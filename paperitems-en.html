@@ -11,6 +11,15 @@
 
 <body class="index-page">
 
+    <!-- Loading -->
+<div id="page-loader" aria-label="Loading" role="status">
+  <div class="loading-dots">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
 <header>
 
  <!-- ロゴ -->
@@ -56,37 +65,37 @@
     <div class="works-grid">
 
         <!-- 作品01 -->
-        <a href="packaging.html" class="work-item">
-            <img src="images/sample.jpg" alt="Welcome Poster">
+        <a href="packaging-en.html" class="work-item">
+            <img src="images/packing01.png" alt="Welcome Poster">
             <p>PACKAGING</p>
         </a>
 
         <!-- 作品02 -->
-        <a href="profilebook.html" class="work-item">
+        <a href="profilebook-en.html" class="work-item">
             <img src="images/sassi1.png" alt="profilebook">
             <p>PROFILE BOOK</p>
         </a>
 
         <!-- 作品03 -->
-        <a href="menucards.html" class="work-item">
-            <img src="images2/menu1.jpg" alt="menucards">
+        <a href="menucards-en.html" class="work-item">
+            <img src="images/menu1.png" alt="menucards">
             <p>MENU CARDS</p>
         </a>
 
         <!-- 作品04 -->
-        <a href="seatingchart.html" class="work-item">
-            <img src="images/sample.jpg" alt="seatingchart">
+        <a href="seatingchart-en.html" class="work-item">
+            <img src="images/sekizi01.jpg" alt="seatingchart">
             <p>SEATING CHART</p>
         </a>
 
         <!-- 作品05 -->
-        <a href="placecards.html" class="work-item">
-            <img src="images/sample.jpg" alt="placecards">
+        <a href="placecards-en.html" class="work-item">
+            <img src="images/p1.jpg" alt="placecards">
             <p>PLACE CARDS</p>
         </a>
 
         <!-- 作品06 -->
-        <a href="tablenumbers.html" class="work-item">
+        <a href="tablenumbers-en.html" class="work-item">
             <img src="images2/number1.png" alt="tablenumbers">
             <p>TABLE NUMBERS</p>
         </a>
@@ -104,7 +113,7 @@
 <!-- BACK ボタン -->
 
      <div class="back-button">
-     <a href="index.html">← BACK</a>
+     <a href="index-en.html">← BACK</a>
      </div>
 
 
@@ -288,6 +297,34 @@
 <!-- JavaScript -->
 
 <script src="script.js"></script>
+
+
+<script>
+(() => {
+  const loader = document.getElementById("page-loader");
+  if (!loader) return;
+
+  let timer;
+
+  function hideLoader() {
+    clearTimeout(timer);
+    loader.classList.remove("is-visible");
+  }
+
+  // 読み込みに0.3秒以上かかった場合だけ表示
+  if (document.readyState !== "complete") {
+    timer = setTimeout(() => {
+      loader.classList.add("is-visible");
+    }, 300);
+
+    window.addEventListener("load", hideLoader, { once: true });
+  }
+
+  // 戻る・進むで復帰したとき
+  window.addEventListener("pageshow", hideLoader);
+})();
+</script>
+
 
 </body>
 
