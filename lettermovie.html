@@ -11,6 +11,15 @@
 
 <body class="index-page">
 
+    <!-- Loading -->
+<div id="page-loader" aria-label="Loading" role="status">
+  <div class="loading-dots">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
 <header>
 
  <!-- ロゴ -->
@@ -63,23 +72,50 @@
     <!-- 説明文 -->
     <div class="poster-description">
         <p>
-            実際の手紙に書かれた直筆の文字を字幕として使用したレタームービー。文字のにじみや配置、全体のバランスを工夫し、書き手の感情が伝わる表現を目指した。また、手紙の言葉に合わせて思い出の写真を選び、新郎新婦自身が朗読・録音した音声を取り入れた。<br>
-            楽曲には、桑田佳祐の『明日晴れるかな』とback numberの『Stay With Me』を使用した。使用楽曲については著作権に関する許諾申請を行い、必要な許諾証を取得した。
-
+            Music1— 明日晴れるかな / 桑田佳祐 <br>
+            Music2— Stay With Me / back number<br>
         </p>
+        
     </div>
 
-    <!-- 作品写真 -->
-    <div class="poster-gallery">
-        <img src="images/sample.jpg" alt="01">
-        <img src="images/sample.jpg" alt="02">
+    <!-- 作品映像 -->
+<div class="movie-gallery">
+
+    <!-- オープニング動画 -->
+      <div class="movie-opening">
+    <img src="images1/promo0001.jpg" alt="Letter Movie">
+    <p class="process-number">01 / 手紙 </p>
+        <p class="process-caption">実際の手紙に書かれた直筆の文字を字幕に使用したレタームービー。思い出の写真と、新郎新婦自身が朗読・録音した音声を重ねた。</p>
+        </div>
+
+    <!-- GIF -->
+    <div class="movie-gifs">
+        <img src="images1/promo0001.gif" alt="Scene 01">
+        <img src="images1/promo002.gif" alt="Scene 02">
+        <img src="images1/promo003.gif" alt="Scene 03">
+        <img src="images1/promo004.jpg" alt="Scene 04">
     </div>
 
+    
     <!-- BACK ボタン -->
 
      <div class="back-button">
      <a href="movies.html">← もどる</a>
      </div>
+
+     <hr class="line-black">
+
+        <div class="poster-heading">
+        <h1>Publication Notes</h1>
+    </div>
+        <div class="poster-description">
+
+        <p>
+           本映像作品は、新郎新婦の了承を得たうえで掲載しています。公開にあたっては、写真や個人情報の取り扱いに十分配慮し、必要に応じて個人情報の匿名化や掲載内容の調整を行っています。<br>
+            また、使用楽曲については、結婚式での上映に必要な著作権に関する許諾申請を行い、許諾証を取得しています。
+        </p>
+    </div>
+
 </main>
 
 </section>
@@ -188,6 +224,34 @@
 <!-- JavaScript -->
 
 <script src="script.js"></script>
+
+
+<script>
+(() => {
+  const loader = document.getElementById("page-loader");
+  if (!loader) return;
+
+  let timer;
+
+  function hideLoader() {
+    clearTimeout(timer);
+    loader.classList.remove("is-visible");
+  }
+
+  // 読み込みに0.3秒以上かかった場合だけ表示
+  if (document.readyState !== "complete") {
+    timer = setTimeout(() => {
+      loader.classList.add("is-visible");
+    }, 300);
+
+    window.addEventListener("load", hideLoader, { once: true });
+  }
+
+  // 戻る・進むで復帰したとき
+  window.addEventListener("pageshow", hideLoader);
+})();
+</script>
+
 
 </body>
 

@@ -11,6 +11,15 @@
 
 <body class="index-page">
 
+    <!-- Loading -->
+<div id="page-loader" aria-label="Loading" role="status">
+  <div class="loading-dots">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
 <header>
 
  <!-- ロゴ -->
@@ -70,10 +79,7 @@
 
     <!-- 作品写真 -->
     <div class="poster-gallery">
-        <img src="images/sample.jpg" alt="01">
-        <img src="images/sample.jpg" alt="02">
-        <img src="images/sample.jpg" alt="03">
-        <img src="images/sample.jpg" alt="04">
+        <img src="images/packing01.png" alt="01">
     </div>
 
     <!-- BACK ボタン -->
@@ -189,6 +195,34 @@
 <!-- JavaScript -->
 
 <script src="script.js"></script>
+
+
+<script>
+(() => {
+  const loader = document.getElementById("page-loader");
+  if (!loader) return;
+
+  let timer;
+
+  function hideLoader() {
+    clearTimeout(timer);
+    loader.classList.remove("is-visible");
+  }
+
+  // 読み込みに0.3秒以上かかった場合だけ表示
+  if (document.readyState !== "complete") {
+    timer = setTimeout(() => {
+      loader.classList.add("is-visible");
+    }, 300);
+
+    window.addEventListener("load", hideLoader, { once: true });
+  }
+
+  // 戻る・進むで復帰したとき
+  window.addEventListener("pageshow", hideLoader);
+})();
+</script>
+
 
 </body>
 
