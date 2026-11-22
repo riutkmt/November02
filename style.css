@@ -419,7 +419,7 @@ header {
     width: 85%;
     max-width: 700px;
     margin: 80px auto;
-    font-size: 15px;
+    font-size: 13px;
 }
 
 /* CONTACTタイトル画像 */
@@ -1501,3 +1501,67 @@ button {
     animation: none;
   }
 }
+
+
+
+/* WEDDING PHOTO SLIDER */
+
+.wedding-slider {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: auto;
+  touch-action: pan-x;
+  scroll-behavior: auto;
+  scroll-snap-type: none;
+  overscroll-behavior-x: contain;
+}
+
+.wedding-slider::-webkit-scrollbar {
+  display: none;
+}
+
+.wedding-track {
+  display: flex;
+  width: max-content;
+  gap: 12px;
+  animation: none;
+}
+
+.wedding-track img {
+  display: block;
+  width: auto;
+  height: 280px;
+  flex-shrink: 0;
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+@media (max-width: 701px) {
+  .wedding-track {
+    gap: 8px;
+  }
+
+  .wedding-track img {
+    height: 180px;
+  }
+}
+
+
+/* PAPER ITEMS 2段スライダー */
+
+.paper-sliders {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+@media (max-width: 701px) {
+  .paper-sliders {
+    gap: 8px;
+  }
+}
+
