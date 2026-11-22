@@ -88,9 +88,23 @@
 
 </section>
 
+<section class="fade-up"></section>
 <div class="welcome-bottom">
-    <img src="images/other1.png" alt="Welcome">
+
+  <div class="wedding-slider" id="wedding-slider">
+    <div class="wedding-track">
+
+      <img src="images/other1.png" alt="Wedding Day 01">
+      <img src="images/other02.jpg" alt="Wedding Day 02">
+      <img src="images/other03.jpg" alt="Wedding Day 03">
+      <img src="images/other04.jpg" alt="Wedding Day 04">
+      <img src="images/other05.jpg" alt="Wedding Day 05">
+
     </div>
+  </div>
+
+</div>
+</section>
 
 <!-- BACK ボタン -->
 
@@ -304,6 +318,118 @@
   window.addEventListener("pageshow", hideLoader);
 })();
 </script>
+
+<script>
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  const slider = document.getElementById("wedding-slider");
+  if (!slider) return;
+
+  const track = slider.querySelector(".wedding-track");
+  if (!track) return;
+
+  const originals = [...track.querySelectorAll("img")]
+    .map(img => img.cloneNode(true));
+
+  let loopWidth = 0;
+  let isTouching = false;
+  let resumeTimer;
+  let resizeTimer;
+
+  const speed = 0.3;
+
+  function setupSlider() {
+
+    track.innerHTML = "";
+
+    // 写真を3セット並べる
+    for (let i = 0; i < 3; i++) {
+      originals.forEach(img => {
+        track.appendChild(img.cloneNode(true));
+      });
+    }
+
+    // 1セット分の正確な幅を取得
+    const first = track.children[0];
+    const next = track.children[originals.length];
+
+    if (!first || !next) return;
+
+    loopWidth =
+      next.getBoundingClientRect().left -
+      first.getBoundingClientRect().left;
+
+    // 画面幅が広い場合はさらに複製
+    while (
+      track.scrollWidth <
+      loopWidth + slider.clientWidth + 100
+    ) {
+      originals.forEach(img => {
+        track.appendChild(img.cloneNode(true));
+      });
+    }
+
+    slider.scrollLeft = 0;
+  }
+
+  function autoScroll() {
+
+    if (!isTouching && loopWidth > 0) {
+
+      slider.scrollLeft += speed;
+
+      if (slider.scrollLeft >= loopWidth) {
+        slider.scrollLeft -= loopWidth;
+      }
+
+    }
+
+    requestAnimationFrame(autoScroll);
+  }
+
+  slider.addEventListener("touchstart", () => {
+    isTouching = true;
+    clearTimeout(resumeTimer);
+  }, { passive: true });
+
+  slider.addEventListener("touchend", () => {
+    clearTimeout(resumeTimer);
+
+    resumeTimer = setTimeout(() => {
+      isTouching = false;
+    }, 1500);
+
+  }, { passive: true });
+
+  slider.addEventListener("touchcancel", () => {
+    isTouching = false;
+  }, { passive: true });
+
+  window.addEventListener("resize", () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(setupSlider, 200);
+  });
+
+  // 写真の読み込み完了後に幅を計算
+  Promise.all(
+    originals.map(img => {
+      if (img.complete) return Promise.resolve();
+
+      return new Promise(resolve => {
+        img.onload = resolve;
+        img.onerror = resolve;
+      });
+    })
+  ).then(() => {
+    setupSlider();
+    requestAnimationFrame(autoScroll);
+  });
+
+});
+
+</script>
+
 
 
 </body>
